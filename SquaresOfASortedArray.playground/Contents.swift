@@ -8,6 +8,9 @@ import UIKit
 
 class Solution {
     func sortedSquares(_ nums: [Int]) -> [Int] {
+        let squaredNums = nums.map { pow(Double($0), 2) }
+        let sortedNums = squaredNums.map { Int($0) }.sorted()
         
+        return sortedNums
     }
 }
