@@ -31,5 +31,17 @@
 
 import Foundation
 
-print("Hello, World!")
+let N: Int = Int(readLine()!)!
+var A: [Int] = readLine()!.split(separator: " ").map { Int($0)! }
+let B: [Int] = readLine()!.split(separator: " ").map { Int($0)! }
 
+let a_sorted = A.sorted(by: <)
+let b_sorted = B.sorted(by: >)
+
+var sum = 0
+
+for i in 0..<N {
+    sum += (a_sorted[i] * b_sorted[i])
+}
+
+print(sum)
