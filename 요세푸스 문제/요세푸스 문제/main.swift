@@ -25,34 +25,52 @@ import Foundation
  
  */
 
-struct Person {
-    var pre: Int
-    var next: Int
-    var deleted: Bool = false
+class Person {
+    var pre: Person?
+    var next: Person?
+    var value: Int
+    
+    init(pre: Person?, next: Person?, value: Int) {
+        self.pre = pre
+        self.next = next
+        self.value = value
+    }
 }
+
+class LinkedList {
+    private var head: Person?
+    private var tail: Person?
+    
+    func append(value: Int) {
+        if head == nil || tail == nil {
+            head = Person.init(pre: nil, next: nil, value: value)
+            tail = head
+            return
+        }
+        
+        let newPerson = Person.init(pre: nil, next: nil, value: value)
+        tail?.next = newPerson
+        newPerson.pre = tail
+        tail = newPerson
+    }
+}
+
+
 
 let input = readLine()!.split(separator: " ").map { Int($0)! }
 let N = input[0]
 let K = input[1]
 
-var people = [Person]()
+let list = LinkedList()
 
 for i in 1...N {
     if i == 1 {
-        let person = Person(pre: N, next: i + 1)
-        people.append(person)
+        list.append(value: 1)
     } else if i == N {
-        let person = Person(pre: N - 1, next: 1)
-        people.append(person)
+        list.append(value: N)
     } else {
-        let person = Person(pre: i - 1, next: i + 1)
-        people.append(person)
+        list.append(value: i)
     }
 }
 
-var i = 0
-while !(people.isEmpty) {
-    
-}
-
-print(people)
+print(list)
